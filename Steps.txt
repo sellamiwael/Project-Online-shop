@@ -1,0 +1,42 @@
+Here are the exact commands you need to type to create and manage your Docker image:
+
+## Step 1: Build the Docker Image
+
+```bash
+# Navigate to your project directory (if not already there)
+cd "C:\Users\sellami\Desktop\Cursor AI\Project-Online-shop"
+
+# Build the image (replace 'sellamiwael' with your Docker Hub username)
+docker build -t sellamiwael/electroshop:latest .
+```
+
+## Step 2: Test the Image Locally
+
+```bash
+# Run the container to test it
+docker run -d -p 8080:80 --name electroshop-test sellamiwael/electroshop:latest
+
+# Check if it's running
+docker ps
+```
+
+Then open your browser and go to: http://localhost:8080
+
+## Step 3: Stop the Test Container
+
+```bash
+# Stop and remove the test container
+docker stop electroshop-test
+docker rm electroshop-test
+```
+
+## Step 4: Push to Docker Hub (Optional)
+
+==============================================================
+
+# Login to Docker Hub first
+docker login
+
+# Push the image to Docker Hub
+docker push sellamiwael/electroshop:latest
+

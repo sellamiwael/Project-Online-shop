@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroShop - Electronics Products</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">⚡ ElectroShop</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="product.html" class="active">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="product-section">
+    <h1>Premium Electronics Collection</h1>
+    <p>Discover our carefully curated selection of cutting-edge electronics and tech gadgets</p>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="images/WirelessHeadphones.jpg" alt="Headphones">
+        <h3>Wireless Headphones</h3>
+        <p>$49.99</p>
+        <button onclick="addToCart('Wireless Headphones')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/Smartwatch.jpg" alt="Smartwatch">
+        <h3>Smartwatch</h3>
+        <p>$79.99</p>
+        <button onclick="addToCart('Smartwatch')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/SportSneakers.jpg" alt="Sneakers">
+        <h3>Sport Sneakers</h3>
+        <p>$59.99</p>
+        <button onclick="addToCart('Sport Sneakers')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/LightweightLaptop.jpg" alt="Laptop">
+        <h3>Lightweight Laptop</h3>
+        <p>$699.99</p>
+        <button onclick="addToCart('Lightweight Laptop')">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 ElectroShop - Premium Electronics Store. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
