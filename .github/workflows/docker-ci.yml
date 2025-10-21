@@ -1,9 +1,7 @@
-name: Build and Push Docker Image
+name: Build, Push, and Deploy
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -28,3 +26,20 @@ jobs:
       with:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/project-online-shop:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Connect to EC2 and update container
+      uses: appleboy/ssh-action@v1.1.0
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_KEY }}
+        script: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/project-online-shop:latest
+          docker stop project || true
+          docker rm project || true
+          docker run -d -p 80:80 --name project ${{ secrets.DOCKERHUB_USERNAME }}/project-online-shop:latest
