@@ -28,6 +28,7 @@ jobs:
       with:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/project-online-shop:latest
+        no-cache: true   # <-- force rebuild every time to include code changes
 
     - name: Deploy and restart container on EC2
       uses: appleboy/ssh-action@v1.0.3
@@ -36,16 +37,17 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          echo "Pulling latest image..."
+          echo "Updating Docker image on EC2..."
           sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/project-online-shop:latest
 
-          echo "Stopping old container if exists..."
+          echo "Stopping and removing existing container..."
           sudo docker stop project || true
-
-          echo "Removing old container..."
           sudo docker rm project || true
 
-          echo "Starting new container..."
+          echo "Removing old images to avoid cache..."
+          sudo docker image prune -a -f || true
+
+          echo "Starting new container with latest image..."
           sudo docker run -d -p 80:80 --name project ${{ secrets.DOCKERHUB_USERNAME }}/project-online-shop:latest
 
-          echo "Deployment completed successfully."
+          echo "✅ Deployment completed successfully!"
